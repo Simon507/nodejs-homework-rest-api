@@ -4,8 +4,6 @@ const Joi = require('joi');
 
 const { handleMongooseError } = require('../helpers');
 
-const phonePattern = /^[(]{1}[0-9]{3}[)]{1} [0-9]{3}[-]{1}[0-9]{4}$/;
-
 const contactSchema = new Schema(
   {
     name: {
@@ -18,7 +16,7 @@ const contactSchema = new Schema(
     },
     phone: {
       type: String,
-      match: phonePattern,
+
       required: true,
     },
     favorite: {
@@ -35,7 +33,7 @@ contactSchema.post('save', handleMongooseError);
 const addContactSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
-  phone: Joi.string().pattern(phonePattern).required(),
+  phone: Joi.string().required(),
   favorite: Joi.boolean(),
 });
 

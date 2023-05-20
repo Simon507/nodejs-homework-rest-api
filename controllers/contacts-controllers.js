@@ -1,5 +1,3 @@
-// const contactsService = require('../models/contacts');
-
 const { Contact } = require('../models/contact');
 
 const { HttpError } = require('../helpers');
