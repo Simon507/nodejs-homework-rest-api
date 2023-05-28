@@ -16,17 +16,11 @@ const authenticate = async (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, SECRET_KEY);
-    console.log(id);
-    // id выводится
+    const user = await User.findById(id);
 
-    console.log(`пробую достать юзера`);
-    // const user = await User.findById(id);
-
-    // как только раскомментировать строчку сверху => все падает
-
-    // if (!user) {
-    //   next(HttpError(401));
-    // }
+    if (!user) {
+      next(HttpError(401));
+    }
     next();
   } catch {
     console.log(`ошибка по кетчу`);
