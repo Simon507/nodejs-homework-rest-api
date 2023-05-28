@@ -1,7 +1,8 @@
 const controllersWrapper = require('./controllers-wrapper');
-const validateBody = require('./validateBody');
+const { validateBody, validateBodyFavorite } = require('./validateBody');
 
 module.exports = {
   controllersWrapper,
   validateBody,
+  validateBodyFavorite,
 };

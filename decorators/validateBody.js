@@ -17,4 +17,17 @@ const validateBody = schema => {
   return func;
 };
 
-module.exports = validateBody;
+const validateBodyFavorite = schema => {
+  const func = (req, res, next) => {
+    const { error } = schema.validate(req.body);
+    if (error) {
+      const errorMessage = `missing field favorite`;
+      next(HttpError(400, errorMessage));
+    }
+    next();
+  };
+
+  return func;
+};
+
+module.exports = { validateBody, validateBodyFavorite };
