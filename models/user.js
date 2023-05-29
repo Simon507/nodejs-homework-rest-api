@@ -2,8 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const Joi = require('joi');
 
-const { handleMongooseError } = require('../helpers');
-
+const handleMongooseError = require('../helpers/handleMongooseError');
 const userSchema = new Schema(
   {
     name: {
@@ -24,7 +23,7 @@ const userSchema = new Schema(
       enum: ['starter', 'pro', 'business'],
       default: 'starter',
     },
-    token: String,
+    token: { type: String, default: '' },
   },
   { versionKey: false, timestamps: true }
 );
@@ -35,15 +34,15 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   password: Joi.string().required(),
   email: Joi.string().required(),
-  // subscription: Joi.string().required(),
-  // favorite: Joi.boolean(),
+  subscription: Joi.string(),
+  favorite: Joi.boolean(),
 });
 
 const loginSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
-  // subscription: Joi.string().required(),
-  // favorite: Joi.boolean(),
+  subscription: Joi.string(),
+  favorite: Joi.boolean(),
 });
 
 const joiAuthSchemas = { registerSchema, loginSchema };
