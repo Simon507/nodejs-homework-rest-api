@@ -8,7 +8,9 @@ const { joiSchemas } = require('../../models/contact');
 
 const { validateBody, validateBodyFavorite } = require('../../decorators');
 
-const { isValidId } = require('../../helpers');
+const { isValidId, authenticate } = require('../../helpers');
+
+router.use(authenticate);
 
 router.get('/', contactsController.getAllContacts);
 
