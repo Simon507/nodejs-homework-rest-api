@@ -8,14 +8,23 @@ const { validateBody } = require('../../decorators');
 
 const { joiAuthSchemas } = require('../../models/user');
 
+const upload = require('../../helpers/upload');
+
 const authRouter = express.Router();
 
-authRouter.post('/register', validateBody(joiAuthSchemas.registerSchema), ctrl.registrer);
+authRouter.post(
+  '/register',
+  upload.single('avatar'),
+  validateBody(joiAuthSchemas.registerSchema),
+  ctrl.registrer
+);
 
 authRouter.post('/login', validateBody(joiAuthSchemas.loginSchema), ctrl.login);
 
 authRouter.get('/current', authenticate, ctrl.getCurrent);
 
 authRouter.post('/logout', authenticate, ctrl.logout);
+
+authRouter.patch('/avatars', authenticate, upload.single('avatar'), ctrl.changeAvatar);
 
 module.exports = authRouter;
