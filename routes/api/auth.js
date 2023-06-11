@@ -21,6 +21,10 @@ authRouter.post(
 
 authRouter.post('/login', validateBody(joiAuthSchemas.loginSchema), ctrl.login);
 
+authRouter.get('/verify/:verificationToken', ctrl.verify);
+
+authRouter.post('/verify', validateBody(joiAuthSchemas.verifyEmailSchema), ctrl.verifyResend);
+
 authRouter.get('/current', authenticate, ctrl.getCurrent);
 
 authRouter.post('/logout', authenticate, ctrl.logout);
